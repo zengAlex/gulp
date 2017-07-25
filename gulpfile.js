@@ -13,6 +13,7 @@ var rename = require('gulp-rename'); // 文件更名
 var watch  = require('gulp-watch');    //文件监听
 var notify = require('gulp-notify'); //提示信息
 var uglify = require('gulp-uglify'); //压缩JS
+var figlet = require("figlet"); //figlet
 var spritesmith = require('gulp.spritesmith');  //图片合成文件
 
 // 合并压缩成雪碧图
@@ -46,6 +47,23 @@ gulp.task('minJS', function(){
 	.pipe(gulp.dest('./dist/js/'));
 });
 
+    
+//生成
+//https://github.com/scottgonzalez/figlet-js/tree/master/fonts 字体类型选择
+gulp.task('figlet', function(){
+    figlet.text('caiMao', {
+        font: 'fender',
+        horizontalLayout: 'default',
+        verticalLayout: 'default'
+    }, function(err, data) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+        console.log(data);
+    });
+});
  
 //合并指令 一次性打包生产
 gulp.task('default',['minJS','minCss', 'spritesmith']);
